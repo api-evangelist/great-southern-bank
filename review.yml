@@ -1,0 +1,97 @@
+aid: great-southern-bank
+name: Great Southern Bank
+review:
+  question: Does Great Southern Bank expose a confirmed public API surface, and is
+    it a bank-proprietary contract or the shared CDR standard?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  specProvenance: DSB Consumer Data Standards (CDS) — shared national standard, not
+    a bank-proprietary contract.
+findings:
+  summary: |
+    Great Southern Bank's only confirmed public, unauthenticated API surface is the
+    Consumer Data Right (CDR / Open Banking) Product Reference Data (PRD) API,
+    exposed as a CDR data holder. Two brands are registered in the ACCC/DSB CDR
+    Register and both return live product data:
+
+      - Retail: https://api.open-banking.greatsouthernbank.com.au
+        GET /cds-au/v1/banking/products -> HTTP 200, x-v: 3, meta.totalRecords 75
+      - Business+: https://od1.open-banking.business.greatsouthernbank.com.au/api
+        GET /cds-au/v1/banking/products -> HTTP 200, x-v: 4/5, meta.totalRecords 16
+
+    The bank (a business name of Credit Union Australia Ltd, ABN 44 087 650 959) does
+    NOT operate a self-serve public developer portal. A developer.greatsouthernbank.com.au
+    host does not resolve (connection failure). There is no Up-bank-style personal
+    banking API, no published SDKs, and no bank-authored OpenAPI. Authenticated CDR
+    resource endpoints (accounts, balances, transactions) are gated by the CDR
+    ecosystem and reachable only by ACCC-accredited data recipients (ADRs) — they are
+    not open to the general public. The PRD endpoints above are the genuine open
+    surface; everything else in the CDS banking schema is authenticated ADR-only.
+  authModel: |
+    Consumer data sharing follows the CDR security profile: OAuth2 / OpenID Connect
+    with the FAPI (Financial-grade API) profile, PAR, and the CDR's ADR accreditation
+    and dynamic client registration model. Only the Product Reference Data endpoints
+    are unauthenticated and public. The bank does not issue self-service API keys.
+  specProvenanceNote: |
+    The harvested OpenAPI at openapi/great-southern-bank-cds-banking-products-openapi.yml
+    is the shared DSB Consumer Data Standards "CDR Banking API" document (OpenAPI
+    3.0.3, info.title "CDR Banking API", version 1.36.0), downloaded verbatim from
+    the official DSB publication at
+    https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_banking.json.
+    It is the national CDS standard every Australian ADI implements, NOT a
+    Great-Southern-Bank-proprietary contract. Great Southern Bank publishes no
+    bank-specific OpenAPI of its own. The /banking/products and
+    /banking/products/{productId} operations in this spec are the ones served by the
+    confirmed public PRD base URLs above.
+  githubNote: |
+    A github.com/greatsouthernbank account exists but is a personal User account with
+    zero public repos whose blog points to greatsouthernbank.com (the unrelated US
+    Great Southern Bancorp of Missouri). It is not confidently the Australian bank and
+    was deliberately excluded from apis.yml common[] to avoid misattribution.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.open-banking.greatsouthernbank.com.au
+      documented: true
+      note: Retail CDR PRD. GET /cds-au/v1/banking/products confirmed HTTP 200, x-v 3.
+    - protocol: REST
+      scheme: https
+      baseURL: https://od1.open-banking.business.greatsouthernbank.com.au/api
+      documented: true
+      note: Business+ CDR PRD. GET /cds-au/v1/banking/products confirmed HTTP 200, x-v 4/5.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket, streaming, GraphQL, or AsyncAPI surface is documented.
+  endpointsConfirmed:
+    - GET https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products
+    - GET https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products
+sources:
+  - url: https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+    type: APIReference
+    note: |
+      Official ACCC/DSB CDR Register brands summary (HTTP 200). Lists Great Southern
+      Bank (brandId aff66646-9ad8-eb11-a824-000d3a884a20, publicBaseUri
+      https://api.open-banking.greatsouthernbank.com.au) and Great Southern Bank
+      Business+ (brandId 7539fe61-f2e3-ed11-a83a-000d3a8830d6, publicBaseUri
+      https://od1.open-banking.business.greatsouthernbank.com.au/api), both ABN
+      44087650959.
+  - url: https://www.greatsouthernbank.com.au/consumer-data-policy
+    type: Documentation
+    note: Bank's CDR Policy page — customer consent, data sharing, no voluntary product/consumer data.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_banking.json
+    type: OpenAPI
+    note: Source of the harvested CDS banking OpenAPI (verbatim). Provenance = DSB standard.
+  - url: https://www.greatsouthernbank.com.au/
+    type: Website
+    note: Home page (WAF returns 403 to automated clients; live via browser/reader). Footer confirms "business name of Credit Union Australia Ltd".
+actions:
+  openapiPath: openapi/great-southern-bank-cds-banking-products-openapi.yml
+  apisYmlUpdated: true
+  reason: |
+    Captured the bank's genuine public API posture: two confirmed live CDR PRD
+    endpoints (retail + Business+) plus the shared DSB CDS banking OpenAPI as the
+    contract they implement. No proprietary spec, no developer portal, no SDKs exist,
+    so none were fabricated.
