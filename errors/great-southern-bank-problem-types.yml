@@ -1,0 +1,58 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cds-error-list
+envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+  field: errors[]
+  members: [code, title, detail, meta]
+  note: >-
+    CDS standard error format (errors[] with URN-namespaced code, title, detail,
+    optional meta). This is NOT RFC 9457 application/problem+json. Error codes are
+    URNs standardised by the Data Standards Body; respondent-specific errors extend
+    a base URN carried in meta.
+problems:
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Missing
+  title: Missing Required Field
+  detail: A required field or header was not supplied.
+  source_operations: [listBankingProducts, getBankingProductDetail]
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Invalid
+  title: Invalid Field
+  detail: A supplied field or query value failed validation.
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidDateTime
+  title: Invalid Date
+  detail: A supplied date/date-time query parameter (e.g. updated-since) is not a valid value.
+  source_operations: [listBankingProducts]
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidPageSize
+  title: Invalid Page Size
+  detail: The page-size query parameter is outside the permitted range.
+  source_operations: [listBankingProducts]
+- status: 400
+  code: urn:au-cds:error:cds-all:Header/InvalidVersion
+  title: Invalid Version
+  detail: The x-v or x-min-v header is not a valid positive integer.
+  source_operations: [listBankingProducts, getBankingProductDetail]
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/Invalid
+  title: Invalid Resource
+  detail: The requested resource (e.g. productId) does not exist.
+  source_operations: [getBankingProductDetail]
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/NotImplemented
+  title: Resource Not Implemented
+  detail: The requested resource or endpoint version is not implemented by this data holder.
+- status: 406
+  code: urn:au-cds:error:cds-all:Header/UnsupportedVersion
+  title: Unsupported Version
+  detail: None of the endpoint versions requested via x-v / x-min-v are supported.
+  source_operations: [listBankingProducts, getBankingProductDetail]
+- status: 422
+  code: urn:au-cds:error:cds-banking:Authorisation/UnavailableBankingAccount
+  title: Unavailable Banking Account
+  detail: The requested banking account is not available (applies to authenticated account resources).

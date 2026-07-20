@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+note: >-
+  These OAuth2 scopes govern AUTHENTICATED CDR banking resource sharing and apply
+  only to ACCC-accredited data recipients (ADRs). The public Product Reference
+  Data endpoints (listBankingProducts / getBankingProductDetail) require NO scope.
+  Scopes are annotated per-operation in the shared DSB CDS Banking spec as
+  x-scopes and standardised nationally by the Data Standards Body — they are not
+  Great-Southern-Bank-specific.
+schemes:
+- name: CDR-OAuth2
+  source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+  flows:
+  - flow: authorizationCode
+    note: CDR / FAPI 1.0 Advanced authorization code flow with PAR + PKCE.
+scopes:
+- scope: bank:accounts.basic:read
+  description: Read basic account information (account list, product category, open/closed status).
+  flows: [authorizationCode]
+  sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]
+- scope: bank:accounts.detail:read
+  description: Read detailed account information including account numbers and features.
+  flows: [authorizationCode]
+  sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]
+- scope: bank:transactions:read
+  description: Read account transaction history.
+  flows: [authorizationCode]
+  sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]
+- scope: bank:payees:read
+  description: Read saved payees.
+  flows: [authorizationCode]
+  sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]
+- scope: bank:regular_payments:read
+  description: Read direct debits and scheduled/regular payments.
+  flows: [authorizationCode]
+  sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]

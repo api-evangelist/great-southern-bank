@@ -1,0 +1,63 @@
+generated: '2026-07-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+docs: https://www.greatsouthernbank.com.au/consumer-data-policy
+summary:
+  types:
+  - none
+  - oauth2
+  - openIdConnect
+  - mutualTLS
+  note: >-
+    The only public, self-serve surface at Great Southern Bank is the Consumer
+    Data Right (CDR) Product Reference Data (PRD) API, which is UNAUTHENTICATED
+    by standard (no API key, no token). All other CDR banking resource endpoints
+    (accounts, balances, transactions, direct debits, scheduled payments, payees)
+    are authenticated under the CDR security profile and are reachable ONLY by
+    ACCC-accredited data recipients (ADRs). The bank does not issue self-service
+    API keys and operates no public developer portal.
+schemes:
+- name: PublicProductReferenceData
+  type: none
+  applies_to:
+  - listBankingProducts
+  - getBankingProductDetail
+  note: >-
+    Product Reference Data endpoints are openly accessible with no credential.
+    Confirmed live: GET https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products
+    returns HTTP 200 with no Authorization header.
+  sources:
+  - openapi/great-southern-bank-cds-banking-products-openapi.yml
+- name: CDR-OIDC-FAPI
+  type: openIdConnect
+  scheme: fapi-1.0-advanced
+  applies_to: authenticated CDR banking resource endpoints (ADR-only)
+  note: >-
+    Consumer data sharing follows the CDR security profile: OpenID Connect with
+    the FAPI 1.0 Advanced profile, Pushed Authorization Requests (PAR), private_key_jwt
+    client authentication, and the CDR Register's dynamic client registration and
+    ADR accreditation model. Not available to the general public.
+  sources:
+  - review.yml
+- name: CDR-OAuth2
+  type: oauth2
+  applies_to: authenticated CDR banking resource endpoints (ADR-only)
+  flows:
+  - flow: authorizationCode
+    note: Authorization Code flow with PKCE per the CDR / FAPI security profile; consumer authorises data sharing.
+  scopes:
+  - bank:accounts.basic:read
+  - bank:accounts.detail:read
+  - bank:transactions:read
+  - bank:payees:read
+  - bank:regular_payments:read
+  sources:
+  - openapi/great-southern-bank-cds-banking-products-openapi.yml
+- name: MutualTLS
+  type: mutualTLS
+  applies_to: all authenticated CDR data-holder endpoints
+  note: >-
+    CDR data-holder endpoints are served over the MTLS server described in the
+    spec (servers[].description "MTLS"); ADRs present a CDR-issued client certificate.
+  sources:
+  - openapi/great-southern-bank-cds-banking-products-openapi.yml

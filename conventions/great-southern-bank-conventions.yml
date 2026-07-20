@@ -1,0 +1,76 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#introduction
+note: >-
+  Cross-cutting request/response semantics for the Great Southern Bank CDR
+  endpoints. These conventions are defined by the DSB Consumer Data Standards
+  (CDS) and are implemented uniformly across every Australian CDR data holder;
+  they are captured here as the operating contract for the public Product
+  Reference Data (PRD) API and the wider CDR banking surface.
+authentication:
+  public_prd: none
+  authenticated: OAuth2 / OIDC FAPI 1.0 Advanced (ADR-only)
+  ref: authentication/great-southern-bank-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    The CDR banking surface is read-only (GET). There is no idempotency-key
+    contract because no state-changing operations are exposed.
+versioning:
+  scheme: header
+  request_headers:
+  - name: x-v
+    required: true
+    description: Version of the API endpoint requested by the client (positive integer). Server responds with the highest supported version between x-min-v and x-v.
+  - name: x-min-v
+    required: false
+    description: Minimum acceptable endpoint version. If all requested versions are unsupported the endpoint MUST respond 406 Not Acceptable.
+  response_headers:
+  - name: x-v
+    description: The endpoint version actually used to process the response.
+  current_products_version: '5'
+  ref: lifecycle/great-southern-bank-lifecycle.yml
+pagination:
+  style: page-number
+  params:
+  - name: page
+    in: query
+    description: Page of results to request (standard pagination).
+  - name: page-size
+    in: query
+    default: 25
+    description: Page size to request. Default is 25.
+  response_fields:
+  - meta.totalRecords
+  - meta.totalPages
+  - links.first
+  - links.prev
+  - links.next
+  - links.last
+  - links.self
+request_tracing:
+  header: x-fapi-interaction-id
+  description: >-
+    An interaction ID (RFC 4122 UUID) an ADR may set on authenticated calls; the
+    data holder echoes it back for correlation. Optional/absent on the public PRD
+    endpoints.
+  additional_fapi_headers:
+  - x-fapi-auth-date
+  - x-fapi-customer-ip-address
+  - x-cds-client-headers
+error_envelope:
+  format: cds-error-list
+  media_type: application/json
+  schema: ResponseErrorListV2
+  shape: '{ "errors": [ { "code": "<urn>", "title": "...", "detail": "...", "meta": {} } ] }'
+  ref: errors/great-southern-bank-problem-types.yml
+  note: >-
+    CDS uses its own URN-namespaced error envelope (errors[] with code/title/detail/meta),
+    NOT RFC 9457 application/problem+json.
+rate_limiting:
+  documented: false
+  note: >-
+    The CDS specifies traffic-thresholds/NFRs for accredited ADR traffic in the
+    standards, but no per-response rate-limit headers are documented for the
+    public PRD endpoints.

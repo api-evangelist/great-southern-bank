@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+note: >-
+  Great Southern Bank publishes no official MCP server. This is a CANDIDATE tool
+  list derived from the two publicly reachable, unauthenticated CDR Product
+  Reference Data operations. Authenticated CDR resource operations are excluded
+  because they require ACCC ADR accreditation and cannot be exposed as a public
+  MCP tool.
+server:
+  name: great-southern-bank
+  transport: http
+  url: null
+tools:
+- name: list_banking_products
+  description: List Great Southern Bank products openly offered to the market (term deposits, transaction & savings accounts, home & personal loans, credit cards), with product-category, brand, and updated-since filtering plus page/page-size pagination.
+  source_operation: openapi/great-southern-bank-cds-banking-products-openapi.yml#listBankingProducts
+  auth: none
+- name: get_banking_product_detail
+  description: Get full detail for a single Great Southern Bank product by productId, including features, fees, deposit/lending rates, eligibility, constraints, and bundles.
+  source_operation: openapi/great-southern-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  auth: none

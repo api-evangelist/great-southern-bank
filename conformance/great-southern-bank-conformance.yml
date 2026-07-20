@@ -1,0 +1,54 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://www.greatsouthernbank.com.au/consumer-data-policy
+note: >-
+  Great Southern Bank is a registered Consumer Data Right (CDR) data holder for
+  two brands (retail + Business+), listed on the official ACCC/DSB CDR Register
+  and conformant with the DSB Consumer Data Standards. CDR conformance is
+  externally verified via the DSB Conformance Test Suite (CTS) as a condition of
+  registration — a published, audited compliance regime, not a self-assertion.
+compliance_program:
+  regime: Consumer Data Right (CDR) / Open Banking (Australia)
+  role: Data Holder (Authorised Deposit-taking Institution)
+  register: https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+  brands:
+  - name: Great Southern Bank
+    brandId: aff66646-9ad8-eb11-a824-000d3a884a20
+  - name: Great Southern Bank Business+
+    brandId: 7539fe61-f2e3-ed11-a83a-000d3a8830d6
+  abn: '44087650959'
+  policy: https://www.greatsouthernbank.com.au/consumer-data-policy
+standards:
+- id: cds-au-banking
+  conforms: true
+  evidence: Implements DSB Consumer Data Standards Banking API v1.36.0; PRD endpoints live and CTS-verified as a registered data holder.
+- id: oauth2
+  conforms: true
+  evidence: CDR authenticated flows use OAuth2 authorization code (x-scopes bank:* in spec).
+- id: oidc
+  conforms: true
+  evidence: CDR security profile is OpenID Connect based.
+- id: fapi-1.0-advanced
+  conforms: true
+  evidence: CDR mandates the FAPI 1.0 Advanced profile (PAR, PKCE, private_key_jwt) for data recipients.
+- id: mutual-tls
+  conforms: true
+  evidence: Data-holder resource endpoints served over MTLS (servers[].description "MTLS").
+- id: pagination
+  conforms: true
+  evidence: Standard page/page-size pagination with meta.totalRecords/totalPages and links.*.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Uses the CDS URN error envelope (ResponseErrorListV2), not application/problem+json.
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: odata
+  conforms: false
+- id: json-api
+  conforms: false
+- id: psd2
+  conforms: false
+  evidence: CDR is Australia's open-banking regime; the EU PSD2 standard does not apply.

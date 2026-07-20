@@ -1,0 +1,105 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#banking-apis
+note: >-
+  Entity-relationship graph derived from the DSB CDS Banking schemas. Only the
+  Product entities are reachable on Great Southern Bank's public (unauthenticated)
+  PRD surface; Account/Transaction/Payee/Balance/DirectDebit/ScheduledPayment
+  entities are part of the authenticated CDR resource surface (ADR-only) and are
+  included for completeness of the standard the bank implements.
+entities:
+- name: BankingProduct
+  schema: BankingProductV6
+  public: true
+  id: BankingProductId
+  key_fields: [productId, brand, brandName, name, productCategory, lastUpdated, isTailored]
+  summary: A product openly offered to the market (returned by listBankingProducts).
+- name: BankingProductDetail
+  schema: BankingProductDetailV7
+  public: true
+  id: BankingProductId
+  summary: Full product detail (returned by getBankingProductDetail), embedding features, fees, deposit/lending rates, eligibility, constraints, bundles.
+- name: BankingAccount
+  schema: BankingAccountV3
+  public: false
+  id: BankingAccountId
+- name: BankingTransaction
+  schema: BankingTransactionV2
+  public: false
+  id: BankingTransactionId
+- name: BankingBalance
+  schema: BankingBalance
+  public: false
+  id: BankingAccountId
+- name: BankingPayee
+  schema: BankingPayeeV2
+  public: false
+  id: BankingPayeeId
+- name: BankingDirectDebit
+  schema: BankingDirectDebit
+  public: false
+  id: BankingAccountId
+- name: BankingScheduledPayment
+  schema: BankingScheduledPaymentV2
+  public: false
+  id: BankingScheduledPaymentId
+relationships:
+- from: BankingProductDetail
+  to: BankingProductFeature
+  type: has_many
+  via: features
+- from: BankingProductDetail
+  to: BankingProductFee
+  type: has_many
+  via: fees
+- from: BankingProductDetail
+  to: BankingProductDepositRate
+  type: has_many
+  via: depositRates
+- from: BankingProductDetail
+  to: BankingProductLendingRate
+  type: has_many
+  via: lendingRates
+- from: BankingProductDetail
+  to: BankingProductEligibility
+  type: has_many
+  via: eligibility
+- from: BankingProductDetail
+  to: BankingProductConstraint
+  type: has_many
+  via: constraints
+- from: BankingProductDetail
+  to: BankingProductBundle
+  type: has_many
+  via: bundles
+- from: BankingProductLendingRate
+  to: BankingProductRateTier
+  type: has_many
+  via: tiers
+- from: BankingAccountDetail
+  to: BankingProduct
+  type: belongs_to
+  via: productCategory
+- from: BankingTransaction
+  to: BankingAccount
+  type: belongs_to
+  via: accountId
+- from: BankingBalance
+  to: BankingAccount
+  type: belongs_to
+  via: accountId
+- from: BankingDirectDebit
+  to: BankingAccount
+  type: belongs_to
+  via: accountId
+- from: BankingScheduledPayment
+  to: BankingAccount
+  type: belongs_to
+  via: from.accountId
+- from: BankingScheduledPayment
+  to: BankingPayee
+  type: has_many
+  via: paymentSet.to.payeeId
+id_prefixes:
+  note: CDS ids (productId, accountId, transactionId, payeeId) are opaque ASCIIString/tokenised values with no standardised human-readable prefix.

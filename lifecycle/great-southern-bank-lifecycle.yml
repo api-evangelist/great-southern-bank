@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+note: >-
+  Great Southern Bank implements the DSB Consumer Data Standards (CDS) lifecycle.
+  Endpoint versioning, obsolescence, and the change cadence are governed nationally
+  by the Data Standards Body rather than by the bank. The bank publishes no
+  self-serve developer status page.
+versioning:
+  scheme: header
+  mechanism: per-endpoint integer version negotiated via x-v (requested) and x-min-v (minimum acceptable) request headers; response carries the x-v actually used.
+  current:
+    listBankingProducts: '5'
+    getBankingProductDetail: '5'
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+deprecation:
+  policy: endpoint-version-obsolescence
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  description: >-
+    CDS deprecates endpoints by superseding their integer version; prior versions
+    are marked obsolete and linked from each operation's description (e.g. get-accounts
+    v1/v2 obsolete). Data holders retire obsolete versions on the DSB's Future Dated
+    Obligations schedule. Unsupported requested versions return 406 Not Acceptable.
+  sunset_header: false
+sla:
+  url: null
+  note: No public SLA/uptime commitment is published for the unauthenticated PRD endpoints; NFRs for accredited ADR traffic are defined in the CDS standards.
+status_page: null
+deprecated_operations: []

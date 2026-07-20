@@ -1,0 +1,27 @@
+# Great Southern Bank
+
+> Great Southern Bank (a business name of Credit Union Australia Ltd, ABN 44 087 650 959) is one of Australia's largest customer-owned banks. Its only public, self-serve API surface is the Consumer Data Right (CDR / Open Banking) Product Reference Data (PRD) API, exposed as a registered CDR data holder for both its retail and Business+ brands. Authenticated consumer data sharing is available only to ACCC-accredited data recipients (ADRs); the bank runs no public developer portal.
+
+## APIs
+
+- [Great Southern Bank CDR Product Reference Data API (retail)](https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products): Public, unauthenticated product data (HTTP 200, x-v 3, ~75 products).
+- [Great Southern Bank Business+ CDR Product Reference Data API](https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products): Public, unauthenticated business product data (HTTP 200, x-v 4/5, ~16 products).
+
+## Specs
+
+- [OpenAPI (DSB CDS Banking, verbatim)](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/openapi/great-southern-bank-cds-banking-products-openapi.yml): Shared Consumer Data Standards Banking API 3.0.3 (v1.36.0) that the bank implements.
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/authentication/great-southern-bank-authentication.yml)
+- [OAuth scopes (CDR banking)](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/scopes/great-southern-bank-scopes.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/conventions/great-southern-bank-conventions.yml)
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/errors/great-southern-bank-problem-types.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/lifecycle/great-southern-bank-lifecycle.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/conformance/great-southern-bank-conformance.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/great-southern-bank/refs/heads/main/data-model/great-southern-bank-data-model.yml)
+
+## Docs
+
+- [Consumer Data Policy](https://www.greatsouthernbank.com.au/consumer-data-policy): The bank's CDR policy (consent, data sharing).
+- [Consumer Data Standards (Banking)](https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis): The national DSB standard implemented by the bank.
+- [ACCC/DSB CDR Register — data holder brands](https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary): Official registration of both Great Southern Bank brands.
+- [Website](https://www.greatsouthernbank.com.au/)
+- [Support](https://www.greatsouthernbank.com.au/help-and-contact/support)

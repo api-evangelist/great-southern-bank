@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Great Southern Bank CDR Product Reference Data
+  version: 1.0.0
+extends: openapi/great-southern-bank-cds-banking-products-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: great-southern-bank
+    x-apievangelist-note: >-
+      Provenance: this is the shared DSB Consumer Data Standards Banking API,
+      implemented by Great Southern Bank as a registered CDR data holder. Only
+      the /banking/products operations are publicly reachable without an accredited
+      data-recipient credential.
+    x-agentic-access:
+      audience: null
+      note: PRD product-lookup operations are read/connected (unauthenticated, public data).
+- target: $.servers
+  update:
+  - url: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1
+    description: Great Southern Bank retail CDR public base (Product Reference Data confirmed live, x-v 3).
+  - url: https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1
+    description: Great Southern Bank Business+ CDR public base (Product Reference Data confirmed live, x-v 4/5).
+- target: $.paths['/banking/products'].get
+  update:
+    x-apievangelist-public: true
+    x-apievangelist-confirmed: 'HTTP 200, x-v 3 (retail) / x-v 4-5 (Business+)'
+- target: $.paths['/banking/products/{productId}'].get
+  update:
+    x-apievangelist-public: true

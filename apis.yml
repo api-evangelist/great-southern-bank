@@ -76,6 +76,36 @@ apis:
     (HTTP 200, x-v 4/5, 16 business banking products). Conforms to the DSB Consumer
     Data Standards banking schema.
 common:
+- type: DomainSecurity
+  url: security/great-southern-bank-domain-security.yml
+- type: Authentication
+  url: authentication/great-southern-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/great-southern-bank-scopes.yml
+- type: Conventions
+  url: conventions/great-southern-bank-conventions.yml
+- type: ErrorCatalog
+  url: errors/great-southern-bank-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/great-southern-bank-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/great-southern-bank-lifecycle.yml
+- type: Conformance
+  url: conformance/great-southern-bank-conformance.yml
+- type: Compliance
+  url: conformance/great-southern-bank-conformance.yml
+- type: DataModel
+  url: data-model/great-southern-bank-data-model.yml
+- type: Overlay
+  url: overlays/great-southern-bank-cds-banking-products-overlay.yaml
+- type: MCPServer
+  url: mcp/great-southern-bank-mcp.yml
+- type: LLMsTxt
+  url: llms/great-southern-bank-llms.txt
+- type: AgentSkill
+  url: skills/great-southern-bank-lookup-products.md
+- type: APIReference
+  url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
 - type: Website
   url: https://www.greatsouthernbank.com.au/
 - type: Documentation
