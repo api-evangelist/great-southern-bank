@@ -1,0 +1,104 @@
+
+{
+  "issuer": "https://auth.open-banking.greatsouthernbank.com.au",
+  "authorization_endpoint": "https://secure.open-banking.greatsouthernbank.com.au/as/authorization.oauth2",
+  "token_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/token.oauth2",
+  "revocation_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/revoke_token.oauth2",
+  "userinfo_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/idp/userinfo.openid",
+  "introspection_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/introspect.oauth2",
+    "jwks_uri": "https://secure.open-banking.greatsouthernbank.com.au/pf/JWKS",
+  "registration_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/clients.oauth2",
+  "ping_revoked_sris_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/pf-ws/rest/sessionMgmt/revokedSris",
+  "ping_end_session_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/idp/startSLO.ping",
+  "device_authorization_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/device_authz.oauth2",
+  "scopes_supported": [
+    "openid",
+    "profile",
+    "offline_access",
+    "bank:accounts.basic:read",
+    "bank:accounts.detail:read",
+    "bank:transactions:read",
+    "bank:payees:read",
+    "bank:regular_payments:read",
+    "common:customer.basic:read",
+    "common:customer.detail:read",
+    "cdr:registration",
+    "admin:metrics.basic:read",
+    "admin:metadata:update"
+  ],
+      "claims_supported": [ "acr", "address", "auth_time", "email", "family_name", "given_name", "name", "phone_number", "sub", "updated_at" ],
+    "response_types_supported": [
+    "code"
+  ],
+  "response_modes_supported": [
+    "fragment.jwt",
+    "jwt",
+    "query.jwt",
+    "form_post.jwt"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials",
+    "refresh_token"
+  ],
+  "authorization_signing_alg_values_supported": [
+    "ES256",
+    "PS256"
+  ],
+  "authorization_encryption_alg_values_supported": [
+    "RSA-OAEP",
+    "RSA-OAEP-256"
+  ],
+  "authorization_encryption_enc_values_supported": [
+    "A128CBC-HS256",
+    "A256GCM"
+  ],
+  "acr_values_supported": [
+    "urn:cds.au:cdr:2"
+  ],
+  "subject_types_supported": [
+    "pairwise"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "ES256",
+    "PS256"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "client_secret_basic",
+    "client_secret_post",
+    "private_key_jwt"
+  ],
+  "token_endpoint_auth_signing_alg_values_supported": [
+    "ES256",
+    "PS256"
+  ],
+  "code_challenge_methods_supported": [
+    "S256"
+  ],
+  "claim_types_supported": [ "normal" ],
+  "claims_parameter_supported": true,
+  "request_parameter_supported": true,
+  "request_uri_parameter_supported": true,
+  "request_object_signing_alg_values_supported": [
+    "ES256",
+    "PS256"
+  ],
+  "id_token_encryption_alg_values_supported": [
+    "RSA-OAEP"
+  ],
+  "id_token_encryption_enc_values_supported": [
+    "A128CBC-HS256",
+    "A256GCM"
+  ],
+  "backchannel_authentication_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/bc-auth.ciba",
+  "backchannel_token_delivery_modes_supported": [ "poll", "ping" ],
+  "backchannel_authentication_request_signing_alg_values_supported": [
+    "ES256",
+    "PS256"
+  ],
+  "backchannel_user_code_parameter_supported": false,
+  "tls_client_certificate_bound_access_tokens": true,
+  "require_pushed_authorization_requests": true,
+  "pushed_authorization_request_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/as/par.oauth2",
+  "cdr_arrangement_revocation_endpoint": "https://auth.open-banking.greatsouthernbank.com.au/data-holder/arrangements/revoke"
+}

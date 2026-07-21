@@ -25,7 +25,7 @@ tags:
 - Customer Owned
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-21'
+modified: '2026-07-22'
 specificationVersion: '0.19'
 apis:
 - aid: great-southern-bank:great-southern-bank-cdr-product-reference-data-api
@@ -199,6 +199,10 @@ common:
   url: data-model/great-southern-bank-data-model.yml
 - type: Overlay
   url: overlays/great-southern-bank-cds-banking-products-overlay.yaml
+- type: WellKnown
+  url: well-known/great-southern-bank-well-known.yml
+- type: OpenIDConnect
+  url: well-known/great-southern-bank-openid-configuration.json
 - type: MCPServer
   url: mcp/great-southern-bank-mcp.yml
 - type: LLMsTxt

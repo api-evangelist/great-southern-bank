@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+source: live probe of Great Southern Bank CDR data-holder hosts
+note: >-
+  Great Southern Bank is a Consumer Data Right (CDR) data holder. Its public
+  Product Reference Data hosts (api.open-banking / od1.open-banking.business)
+  expose no /.well-known/ discovery documents (404), but the retail CDR
+  InfoSec / authorization server publishes a full FAPI 1.0 Advanced OpenID
+  Connect discovery document. The corporate marketing site
+  (www.greatsouthernbank.com.au) returns 403 to automated /.well-known/ probes
+  (WAF/bot protection), so security.txt could not be confirmed.
+hosts:
+- host: https://secure.open-banking.greatsouthernbank.com.au
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: great-southern-bank-openid-configuration.json
+    note: >-
+      CDR / FAPI 1.0 Advanced OIDC discovery. issuer
+      https://auth.open-banking.greatsouthernbank.com.au; PAR required
+      (require_pushed_authorization_requests true); MTLS-bound tokens
+      (tls_client_certificate_bound_access_tokens true); client auth
+      private_key_jwt / client_secret_*; CIBA backchannel; acr urn:cds.au:cdr:2.
+- host: https://api.open-banking.greatsouthernbank.com.au
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://od1.open-banking.business.greatsouthernbank.com.au
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://www.greatsouthernbank.com.au
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    note: WAF/bot protection blocks automated fetch; not confirmed present or absent.
+  - path: /.well-known/openid-configuration
+    status: 403

@@ -1,17 +1,27 @@
-generated: '2026-07-20'
+generated: '2026-07-21'
 method: searched
-source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+source: https://secure.open-banking.greatsouthernbank.com.au/.well-known/openid-configuration
 docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
 note: >-
   These OAuth2 scopes govern AUTHENTICATED CDR banking resource sharing and apply
   only to ACCC-accredited data recipients (ADRs). The public Product Reference
   Data endpoints (listBankingProducts / getBankingProductDetail) require NO scope.
-  Scopes are annotated per-operation in the shared DSB CDS Banking spec as
-  x-scopes and standardised nationally by the Data Standards Body — they are not
-  Great-Southern-Bank-specific.
+  The full scopes_supported list below was confirmed live from the bank's CDR
+  InfoSec OpenID discovery document (secure.open-banking.greatsouthernbank.com.au);
+  the banking:* scopes are also annotated per-operation in the shared DSB CDS
+  Banking spec. Scopes are standardised nationally by the Data Standards Body.
 schemes:
 - name: CDR-OAuth2
-  source: openapi/great-southern-bank-cds-banking-products-openapi.yml
+  source: https://secure.open-banking.greatsouthernbank.com.au/.well-known/openid-configuration
+  issuer: https://auth.open-banking.greatsouthernbank.com.au
+  authorization_endpoint: https://secure.open-banking.greatsouthernbank.com.au/as/authorization.oauth2
+  token_endpoint: https://auth.open-banking.greatsouthernbank.com.au/as/token.oauth2
+  pushed_authorization_request_endpoint: https://auth.open-banking.greatsouthernbank.com.au/as/par.oauth2
+  registration_endpoint: https://auth.open-banking.greatsouthernbank.com.au/as/clients.oauth2
+  grant_types_supported: [authorization_code, client_credentials, refresh_token]
+  code_challenge_methods_supported: [S256]
+  require_pushed_authorization_requests: true
+  tls_client_certificate_bound_access_tokens: true
   flows:
   - flow: authorizationCode
     note: CDR / FAPI 1.0 Advanced authorization code flow with PAR + PKCE.
@@ -36,3 +46,35 @@ scopes:
   description: Read direct debits and scheduled/regular payments.
   flows: [authorizationCode]
   sources: [openapi/great-southern-bank-cds-banking-products-openapi.yml]
+- scope: common:customer.basic:read
+  description: Read basic customer information (name, occupation / organisation basics).
+  flows: [authorizationCode]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: common:customer.detail:read
+  description: Read detailed customer information including contact details and addresses.
+  flows: [authorizationCode]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: cdr:registration
+  description: CDR dynamic client registration scope for accredited data recipient software products.
+  flows: [client_credentials]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: admin:metrics.basic:read
+  description: CDR admin scope for the DSB Get Metrics reporting endpoint (register/admin use).
+  flows: [client_credentials]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: admin:metadata:update
+  description: CDR admin scope for the Metadata Update endpoint (register/admin use).
+  flows: [client_credentials]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: openid
+  description: OpenID Connect base scope.
+  flows: [authorizationCode]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: profile
+  description: OpenID Connect profile claims.
+  flows: [authorizationCode]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
+- scope: offline_access
+  description: Request a refresh token for ongoing consented data sharing.
+  flows: [authorizationCode]
+  sources: [well-known/great-southern-bank-openid-configuration.json]
