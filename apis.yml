@@ -25,7 +25,7 @@ tags:
 - Customer Owned
 - Product Reference Data
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: great-southern-bank:great-southern-bank-cdr-product-reference-data-api
@@ -37,8 +37,8 @@ apis:
   - Banking
   - Retail
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.greatsouthernbank.com.au/consumer-data-policy
-  baseURL: https://api.open-banking.greatsouthernbank.com.au
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products
   properties:
   - url: https://www.greatsouthernbank.com.au/consumer-data-policy
     type: Documentation
@@ -47,11 +47,12 @@ apis:
   - url: openapi/great-southern-bank-cds-banking-products-openapi.yml
     type: OpenAPI
   description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
-    Data (PRD) API for Great Southern Bank's retail banking products. Confirmed live
-    at https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products
+    Data (PRD) API for Great Southern Bank's retail banking products (the Get Products
+    and Get Product Detail endpoints of the DSB CDS Banking API). No consent or ADR
+    accreditation required. Confirmed live at https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products
     (HTTP 200, x-v 3, 75 products across term deposits, transaction accounts, savings,
     home loans, personal loans, and credit cards). Conforms to the DSB Consumer Data
-    Standards banking schema.
+    Standards banking schema (shared standard, not bank-proprietary).
 - aid: great-southern-bank:great-southern-bank-business-cdr-product-reference-data-api
   name: Great Southern Bank Business+ CDR Product Reference Data API
   tags:
@@ -61,8 +62,8 @@ apis:
   - Banking
   - Business
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.greatsouthernbank.com.au/consumer-data-policy
-  baseURL: https://od1.open-banking.business.greatsouthernbank.com.au/api
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products
   properties:
   - url: https://www.greatsouthernbank.com.au/consumer-data-policy
     type: Documentation
@@ -73,8 +74,108 @@ apis:
   description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
     Data (PRD) API for the Great Southern Bank Business+ brand. Confirmed live at
     https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products
-    (HTTP 200, x-v 4/5, 16 business banking products). Conforms to the DSB Consumer
-    Data Standards banking schema.
+    (HTTP 200 with x-v 4, 16 business banking products). Conforms to the DSB Consumer
+    Data Standards banking schema (shared standard, not bank-proprietary).
+- aid: great-southern-bank:great-southern-bank-cdr-accounts-balances-api
+  name: Great Southern Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Banking
+  - Retail
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.greatsouthernbank.com.au/consumer-data-policy
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
+    type: APIReference
+  - url: openapi/great-southern-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Accounts and Balances
+    API for Great Southern Bank — the Get Accounts, Get Account Detail, Get Bulk Balances
+    and Get Account Balance endpoints of the DSB CDS Banking API. Access requires a
+    consumer to authorize an ACCC-accredited data recipient (ADR) through the CDR
+    consent and OIDC/FAPI authorization flow over the bank's MTLS data-holder gateway;
+    it is not open to the public. Conforms to the DSB Consumer Data Standards banking
+    schema (shared standard, not bank-proprietary).
+- aid: great-southern-bank:great-southern-bank-cdr-transactions-api
+  name: Great Southern Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Banking
+  - Retail
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/accounts/{accountId}/transactions
+  properties:
+  - url: https://www.greatsouthernbank.com.au/consumer-data-policy
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
+    type: APIReference
+  - url: openapi/great-southern-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Transactions API for Great
+    Southern Bank — the Get Transactions For Account and Get Transaction Detail endpoints
+    of the DSB CDS Banking API. Access requires a consumer to authorize an ACCC-accredited
+    data recipient (ADR) through the CDR consent and OIDC/FAPI authorization flow over
+    the bank's MTLS data-holder gateway; it is not open to the public. Conforms to
+    the DSB Consumer Data Standards banking schema (shared standard, not bank-proprietary).
+- aid: great-southern-bank:great-southern-bank-cdr-direct-debits-scheduled-payments-api
+  name: Great Southern Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Banking
+  - Retail
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/accounts/direct-debits
+  properties:
+  - url: https://www.greatsouthernbank.com.au/consumer-data-policy
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
+    type: APIReference
+  - url: openapi/great-southern-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Direct Debits and Scheduled
+    Payments API for Great Southern Bank — the Get Direct Debits For Account, Get Bulk
+    Direct Debits, Get Scheduled Payments For Account and Get Scheduled Payments Bulk
+    endpoints of the DSB CDS Banking API. Access requires a consumer to authorize an
+    ACCC-accredited data recipient (ADR) through the CDR consent and OIDC/FAPI authorization
+    flow over the bank's MTLS data-holder gateway; it is not open to the public. Conforms
+    to the DSB Consumer Data Standards banking schema (shared standard, not bank-proprietary).
+- aid: great-southern-bank:great-southern-bank-cdr-payees-api
+  name: Great Southern Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Banking
+  - Retail
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.greatsouthernbank.com.au/open-banking
+  baseURL: https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.greatsouthernbank.com.au/consumer-data-policy
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
+    type: APIReference
+  - url: openapi/great-southern-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Payees API for Great Southern
+    Bank — the Get Payees and Get Payee Detail endpoints of the DSB CDS Banking API.
+    Access requires a consumer to authorize an ACCC-accredited data recipient (ADR)
+    through the CDR consent and OIDC/FAPI authorization flow over the bank's MTLS data-holder
+    gateway; it is not open to the public. Conforms to the DSB Consumer Data Standards
+    banking schema (shared standard, not bank-proprietary).
 common:
 - type: DomainSecurity
   url: security/great-southern-bank-domain-security.yml
@@ -106,6 +207,10 @@ common:
   url: skills/great-southern-bank-lookup-products.md
 - type: APIReference
   url: https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
+- type: Portal
+  url: https://www.greatsouthernbank.com.au/open-banking
+- type: DeveloperPortal
+  url: https://www.greatsouthernbank.com.au/open-banking
 - type: Website
   url: https://www.greatsouthernbank.com.au/
 - type: Documentation
