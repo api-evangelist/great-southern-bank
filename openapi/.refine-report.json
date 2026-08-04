@@ -1,0 +1,26 @@
+{
+  "provider": "great-southern-bank",
+  "sources": [
+    "great-southern-bank-banking-account-balances-api-openapi.yml",
+    "great-southern-bank-banking-account-direct-debits-api-openapi.yml",
+    "great-southern-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "great-southern-bank-banking-account-transactions-api-openapi.yml",
+    "great-southern-bank-banking-accounts-api-openapi.yml",
+    "great-southern-bank-banking-payees-api-openapi.yml",
+    "great-southern-bank-banking-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "great-southern-bank-banking-account-balances-api-openapi.yml",
+    "great-southern-bank-banking-account-direct-debits-api-openapi.yml",
+    "great-southern-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "great-southern-bank-banking-account-transactions-api-openapi.yml",
+    "great-southern-bank-banking-accounts-api-openapi.yml",
+    "great-southern-bank-banking-payees-api-openapi.yml",
+    "great-southern-bank-banking-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
