@@ -38,7 +38,7 @@ tags:
 - Product Reference Data
 created: '2026-07-20'
 modified: '2026-07-22'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: great-southern-bank:great-southern-bank-banking-account-balances-api
   name: Great Southern Bank Banking Account Balances API
