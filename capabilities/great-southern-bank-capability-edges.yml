@@ -1,0 +1,66 @@
+slug: great-southern-bank
+provider: Great Southern Bank
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Banking Products
+  spec_file: great-southern-bank-banking-products-api-openapi.yml
+  capability_id: BC-1310.10
+  capability_id_l1: BC-1310
+  capability_name: Product Catalogue Management
+  confidence: 0.88
+  evidence: GET /banking/products listBankingProducts 'Get Products'; schemas BankingProductDetailV7,
+    BankingProductLendingRateV3, BankingProductDepositRateV2, BankingProductEligibilityV2
+  reason: Publishes the bank's product catalogue with rates, fees, discounts and eligibility — banking
+    product catalogue management.
+- tag: Banking Account Scheduled Payments
+  spec_file: great-southern-bank-banking-account-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: GET /banking/payments/scheduled listScheduledPaymentsBulk 'Get Scheduled Payments Bulk'; schemas
+    BankingScheduledPaymentV2, BankingScheduledPaymentRecurrence, BankingInternationalPayee
+  reason: Scheduled/recurring payment instructions and instalment plans on customer accounts — payment
+    instruction capture and authorisation data, clearly a payments capability.
+- tag: Banking Account Direct Debits
+  spec_file: great-southern-bank-banking-account-direct-debits-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: GET /banking/accounts/{accountId}/direct-debits listDirectDebits 'Get Direct Debits For Account';
+    schemas BankingDirectDebit, BankingAuthorisedEntity, ResponseBankingDirectDebitAuthorisationList
+  reason: Exposes direct-debit authorisations held against bank accounts — payment mandate/instruction
+    authorisation data, a payments capability. Sub-capability assignment is somewhat uncertain (initiation
+    vs clearing).
+- tag: Banking Accounts
+  spec_file: great-southern-bank-banking-accounts-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
+  confidence: 0.7
+  evidence: GET /banking/accounts listBankingAccounts 'Get Accounts'; schemas BankingAccountDetailV5,
+    BankingTermDepositAccount, BankingCreditCardAccount
+  reason: Account list and detail for a retail bank's deposit, term deposit and card accounts — deposit
+    account information. Moderate confidence as the surface spans card accounts too.
+- tag: Banking Payees
+  spec_file: great-southern-bank-banking-payees-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: GET /banking/payees listBankingPayees 'Get Payees'; schemas BankingDomesticPayee, BankingInternationalPayee,
+    BankingBillerPayee, BankingDigitalWalletPayee
+  reason: Saved payee/beneficiary records used to originate payments (domestic, international, biller,
+    digital wallet) — supports payment instruction capture. Sub-capability choice moderately confident.

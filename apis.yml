@@ -158,6 +158,9 @@ apis:
     url: >-
       https://consumerdatastandardsaustralia.github.io/standards/#consumer-data-standards-banking-apis
 common:
+- type: CapabilityMap
+  url: capabilities/great-southern-bank-capability-edges.yml
+  name: Great Southern Bank Business Capability Map
 - type: DomainSecurity
   url: security/great-southern-bank-domain-security.yml
 - type: Authentication
