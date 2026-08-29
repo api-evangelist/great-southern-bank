@@ -14,6 +14,18 @@ description: Great Southern Bank is one of Australia's largest customer-owned (m
   to the Data Standards Body (DSB) Consumer Data Standards (CDS). Authenticated consumer
   data sharing is available only to accredited data recipients (ADRs) via the CDR
   ecosystem; the bank does not operate a self-serve public developer portal.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
