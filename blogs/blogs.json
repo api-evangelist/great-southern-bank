@@ -3,9 +3,12 @@
   "feeds": [
     {
       "source": "https://www.greatsouthernbank.com.au/help-and-contact/support",
-      "error": "HTTPError"
+      "feed_url": "https://www.greatsouthernbank.com.au/help-and-contact/support",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-09-13T13:00:00Z"
+  "fetched": "2026-09-19T20:17:39Z"
 }
