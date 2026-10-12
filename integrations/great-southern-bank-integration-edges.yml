@@ -1,16 +1,68 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/great-southern-bank/integrations
 - https://n8n.io/integrations/great-southern-bank/
 - https://composio.dev/toolkits/great-southern-bank
 - https://monid.ai/tools/great-southern-bank
 checked:
+- https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
 - https://composio.dev/toolkits/great-southern-bank
 - https://monid.ai/tools/great-southern-bank
 - https://n8n.io/integrations/great-southern-bank/
 - https://zapier.com/apps/great-southern-bank/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Consumer Data Right
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  contract_reference:
+    register: CDR Register (Australia, ACCC)
+    spec_file: null
+    role: data-holder
+    registered_name: Great Southern Bank Business+
+    register_id: 7539fe61-f2e3-ed11-a83a-000d3a8830d6
+    matched_domain: greatsouthernbank.com.au
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
+- partner_name: Consumer Data Right
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  contract_reference:
+    register: CDR Register (Australia, ACCC)
+    spec_file: null
+    role: data-holder
+    registered_name: Great Southern Bank
+    register_id: aff66646-9ad8-eb11-a824-000d3a884a20
+    matched_domain: greatsouthernbank.com.au
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
+- partner_name: Consumer Data Right
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  contract_reference:
+    register: CDR Register (Australia, ACCC)
+    spec_file: null
+    role: data-holder
+    registered_name: Solo by MYOB
+    register_id: bfd87b4e-cdf8-ef11-a4de-6045bd3f1cfc
+    matched_domain: greatsouthernbank.com.au
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
 templates: []
